@@ -8,21 +8,21 @@ A research codebase for training Mamba SSM models, extracting their internal sta
 
 | File | Description |
 |---|---|
-| `mamba_clean.py` | Train Mamba on Selective Copying and Induction Heads tasks. Extracts and saves SSM matrices (A, B, C, delta) per layer after training. |
-| `mamba_extraction_dna.py` | Train Mamba on DNA sequence data (LongSafari/open-genome). Extracts and saves SSM matrices to `.npz` files. |
-| `mamba_analysis_clean.py` | Load saved `.npz` matrix files and run full geometric analysis: Frobenius distance, subspace angles, eigenvalue spectra, HiPPO projection, operator shift, and PCA clustering. Produces 8 plots. |
-| `mamba_hippo_clean.py` | Train Mamba with a HiPPO-regularised loss `L = CrossEntropy + λ * HiPPO_Loss(A)` and sweep over lambda values. Produces an accuracy-vs-lambda plot. |
+| `Synthetic_datasets_Matrix_extraction.py` | Train Mamba on Selective Copying and Induction Heads tasks. Extracts and saves SSM matrices (A, B, C, delta) per layer after training. |
+| `DNA_Matrix_extraction.py` | Train Mamba on DNA sequence data (LongSafari/open-genome). Extracts and saves SSM matrices to `.npz` files. |
+| `Matrix_Analysis.py` | Load saved `.npz` matrix files and run full geometric analysis: Frobenius distance, subspace angles, eigenvalue spectra, HiPPO projection, operator shift, and PCA clustering. Produces 8 plots. |
+| `Mamba_Regularised.py` | Train Mamba with a HiPPO-regularised loss `L = CrossEntropy + λ * HiPPO_Loss(A)` and sweep over lambda values. Produces an accuracy-vs-lambda plot. |
 
 ---
 
 ## Pipeline
 
 ```
-mamba_clean.py          →  checkpoints/*.pt
-mamba_extraction_dna.py →  extracted_matrices/*.npz
+Synthetic_datasets_Matrix_extraction.py          →  checkpoints/*.pt
+DNA_Matrix_extraction.py →  extracted_matrices/*.npz
                                ↓
-                        mamba_analysis_clean.py  →  mamba_analysis_results/*.png
-                        mamba_hippo_clean.py     →  hippo_lambda_sweep.png
+                        Matrix_Analysis.py  →  mamba_analysis_results/*.png
+                        Mamba_Regularised.py     →  hippo_lambda_sweep.png
 ```
 
 Run the training scripts first to generate checkpoints and `.npz` files, then run the analysis script.
@@ -82,7 +82,7 @@ pip install einops numpy scipy scikit-learn matplotlib tqdm datasets transformer
 ### 1. Train on Selective Copying and Induction Heads + extract matrices
 
 ```bash
-python mamba_clean.py
+python Synthetic_datasets_Matrix_extraction.py
 ```
 
 Outputs:
@@ -94,7 +94,7 @@ Outputs:
 ### 2. Train on DNA sequences + extract matrices
 
 ```bash
-python mamba_extraction_dna.py
+python DNA_Matrix_extraction.py
 ```
 
 Outputs:
@@ -106,7 +106,7 @@ Outputs:
 ### 3. Run the HiPPO analysis
 
 ```bash
-python mamba_analysis_clean.py
+python Matrix_Analysis.py
 ```
 
 Requires all three `.npz` files to exist in `extracted_matrices/`. Outputs 8 plots and a `summary.txt` to `mamba_analysis_results/`.
@@ -129,7 +129,7 @@ Requires all three `.npz` files to exist in `extracted_matrices/`. Outputs 8 plo
 ### 4. Run the HiPPO lambda sweep
 
 ```bash
-python mamba_hippo_clean.py
+python Mamba_Regularised.py
 ```
 
 Outputs:
@@ -171,7 +171,7 @@ Three HiPPO variants are used in the analysis, all constructed at size 16x16:
 
 ## HiPPO Loss
 
-The regularisation loss used in `mamba_hippo_clean.py` encourages Mamba's diagonal SSM matrix to stay close to the HiPPO-LagT diagonal:
+The regularisation loss used in `Mamba_Regularised.py` encourages Mamba's diagonal SSM matrix to stay close to the HiPPO-LagT diagonal:
 
 ```
 hippo_target[n] = -1  for all n
