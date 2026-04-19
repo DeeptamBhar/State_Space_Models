@@ -1,4 +1,4 @@
-# Chaos Branch Experiment: State Space Modeling of the Lorenz System
+# Chaos Experiment: State Space Modeling of the Lorenz System
 
 ## Overview
 This branch contains an experiment dedicated to modeling and predicting chaotic dynamics using State Space Models (SSMs). Specifically, we generate data from the chaotic **Lorenz-63 system** and train an SSM to learn its continuous-time dependencies and predict its future trajectory.
@@ -35,8 +35,8 @@ pip install torch numpy matplotlib plotly seaborn scipy jupyter
 ## Running the Experiment
 1. Clone the repository and switch to the `chaos` branch (or clone your fork):
    ```bash
-   git clone -b chaos https://github.com/DeeptamBhar/Team1_AIML.git
-   cd Team1_AIML
+   git clone -b chaos https://github.com/DeeptamBhar/State_Space_Models.git
+   cd State_Space_Models
    ```
 2. Open the notebook in Jupyter:
    ```bash
