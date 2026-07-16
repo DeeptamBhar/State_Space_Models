@@ -1,6 +1,6 @@
 # State Space Models
 
-A research repository dedicated to the systematic study of **State Space Models (SSMs)** from the HiPPO framework for continuous time memory to the selective scan **Mamba (S6)** architecture. The project spans theoretical analysis (do trained Mamba models learn HiPPO-like dynamics?), controlled benchmarks (SSMs vs. convolutional models), chaotic dynamical systems, and real world edge deployment on embedded hardware.
+A research repository dedicated to the systematic study of **State Space Models (SSMs)** from the HiPPO framework for continuous time memory to the selective scan **Mamba (S6)** architecture. The project spans theoretical analysis (do trained Mamba models learn HiPPO like dynamics?), controlled benchmarks (SSMs vs. convolutional models), chaotic dynamical systems, and real world edge deployment on embedded hardware.
 
 **Project presentation:** [SSM_Presentation.pdf](./SSM_Presentation.pdf)
 
